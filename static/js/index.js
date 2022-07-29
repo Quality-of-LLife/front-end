@@ -2,6 +2,7 @@ import Home from "./pages/Home.js";
 import Login from "./pages/Login.js";
 import Register from "./pages/Register.js";
 import NotFound from "./pages/NotFound.js";
+import SearchMap from "./pages/SearchMap.js";
 
 const navigateTo = (url) => {
   history.pushState(null, null, url);
@@ -13,6 +14,7 @@ const router = async () => {
     { path: "/", view: Home },
     { path: "/login", view: Login },
     { path: "/register", view: Register },
+    { path: "/searchhospital", view: SearchMap },
   ];
 
   const potentialMatches = routes.map((route) => {
