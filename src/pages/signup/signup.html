@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover;"
+    />
+    <meta name="format-detection" content="telephone=no" />
+    <!-- <link rel="apple-touch-icon-precomposed" href="로고이미지.png" /> -->
+    <title>QOL</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+
+  <style>
+    .wrapper {
+      height: 750px;
+      margin-top: 44px;
+      display: flex;
+      border: solid;
+      flex-direction: column;
+    }
+    .header {
+      margin: 15px;
+      margin-bottom: 30px;
+      display: flex;
+      text-align: center;
+      justify-content: flex-start;
+    }
+
+    .header span {
+      margin-left: 105px;
+    }
+
+    .main {
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+    }
+
+    form {
+      display: flex;
+      width: 60%;
+      flex-direction: column;
+      /* align-items: center; */
+      /* border: solid; */
+    }
+
+    span {
+      margin-bottom: 4px;
+    }
+
+    input {
+      margin-bottom: 50px;
+      height: 44px;
+      border-radius: 10px;
+      border: solid 1px #8460da;
+      outline: none;
+    }
+
+    .genderWrapper {
+      display: flex;
+    }
+    .signupButton {
+      height: 44px;
+      border-radius: 10px;
+      border: solid 1px #8460da;
+      background-color: #8460da;
+      color: white;
+    }
+  </style>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <a href="../login/login.html">
+          <img src="../../static/icons/arrowback.svg" />
+        </a>
+        <span>회원가입</span>
+      </div>
+      <div class="main">
+        <form onsubmit="onSubmit">
+          <span>아이디</span>
+          <input
+            type="text"
+            name="email"
+            class="inputID"
+            placeholder="아이디를 입력해주세요"
+          />
+          <span>비밀번호</span>
+          <input
+            type="password"
+            name="pw"
+            autocomplete="on"
+            class="inputPW"
+            placeholder="비밀번호를 입력해주세요"
+          />
+          <span>비밀번호 재확인</span>
+          <input
+            type="password"
+            name="pw"
+            class="checkPW"
+            placeholder="비밀번호를 다시 입력해주세요"
+          />
+          <div class="genderWrapper">
+            <input
+              class="select"
+              type="radio"
+              name="gender"
+              value="1"
+              checked
+            />여자 <input type="radio" name="gender" value="0" / >남자
+          </div>
+          <button class="signupButton">가입하기</button>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    const signupButton = document.querySelector(".signupButton");
+
+    signupButton.addEventListener("click", () => {
+      event.preventDefault();
+      const inputID = document.querySelector(".inputID").value;
+      const inputPW = document.querySelector(".inputPW").value;
+      const checkPW = document.querySelector(".checkPW").value;
+      const selectGender = document.querySelector(".select").value;
+
+      console.log(inputID);
+      console.log(inputPW);
+      console.log(checkPW);
+      console.log(selectGender);
+
+      axios
+        .post("http://localhost:8800/users", {
+          email: inputID,
+          pw: inputPW,
+          gender: selectGender,
+        })
+        .then((response) => {
+          if (!(inputPW == "")) {
+            location.href = "http://127.0.0.1:5501/src/pages/login/login.html";
+            alert("회원가입을 축하합니다.");
+          }
+        });
+    });
+  </script>
+</html>
