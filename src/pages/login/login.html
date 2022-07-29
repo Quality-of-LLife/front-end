@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;"
+    />
+    <title>QOL</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+
+  <style>
+    .wrapper {
+      height: 750px;
+      border: solid;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-top: 44px;
+    }
+    .loginBox {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      /* border: solid; */
+      margin-bottom: 8px;
+    }
+    .inputID,
+    .inputPW {
+      box-sizing: border-box;
+      border: solid 2px #8460da;
+      width: 80%;
+      height: 44px;
+      border-radius: 10px;
+      margin-top: 22px;
+      outline: none;
+    }
+    .loginButton {
+      margin-top: 30px;
+      width: 80%;
+      height: 50px;
+      border: solid 2px #8460da;
+      border-radius: 10px;
+      background-color: #8460da;
+      cursor: pointer;
+    }
+
+    .buttonWrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      margin-top: 12px;
+    }
+
+    .buttonWrapper .css {
+      border-left: 0.5px solid #b4b4b4;
+      border-right: 0.5px solid #b4b4b4;
+      padding-left: 8px;
+      padding-right: 8px;
+      margin-left: 8px;
+      margin-right: 8px;
+    }
+
+    .signUp {
+      text-decoration: none;
+      color: #8460da;
+    }
+  </style>
+  <body>
+    <div class="wrapper">
+      <form class="loginBox" onsubmit="onSubmit">
+        <input
+          type="text"
+          name="email"
+          id="ID"
+          class="inputID"
+          placeholder="아이디"
+        />
+        <input
+          type="password"
+          name="pw"
+          id="PW"
+          autocomplete="on"
+          class="inputPW"
+          placeholder="비밀번호"
+        />
+        <button class="loginButton">로그인</button>
+      </form>
+      <div class="buttonWrapper">
+        <div>아이디 찾기</div>
+        <div class="css">비밀번호 찾기</div>
+        <a class="signUp" href="../signup/signup.html">회원가입</a>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    const loginButton = document.querySelector(".loginButton");
+
+    loginButton.addEventListener("click", () => {
+      event.preventDefault();
+      const inputID = document.querySelector(".inputID").value;
+      const inputPW = document.querySelector(".inputPW").value;
+      var success = 0;
+      axios.get("http://localhost:8800/users").then((response) => {
+        let users = response.data;
+        console.log(users[0].email);
+        for (let i = 0; i < users.length; i++) {
+          if (users[i].email == inputID && users[i].pw == inputPW) {
+            alert("로그인에 성공했습니다.");
+            location.href = "http://127.0.0.1:5501/src/pages/main/main.html";
+            success = 1;
+            break;
+          }
+        }
+        if (!success) alert("실패");
+      });
+    });
+  </script>
+</html>

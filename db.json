@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "yeonju@naver.com",
+      "pw": "0606",
+      "gender": "1"
+    },
+    {
+      "id": 2,
+      "email": "seojin@naver.com",
+      "pw": "0529",
+      "gender": "1"
+    },
+    {
+      "id": 3,
+      "email": "chaewon@naver.com",
+      "pw": "0906",
+      "gender": "1"
+    },
+    {
+      "id": 4,
+      "email": "yoon@naver.com",
+      "pw": "0209",
+      "gender": "1"
+    },
+    {
+      "id": 5,
+      "email": "minju@naver.com",
+      "pw": "1208",
+      "gender": "0"
+    }
+  ]
+}
